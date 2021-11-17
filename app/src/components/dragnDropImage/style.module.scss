@@ -1,0 +1,28 @@
+
+.download_image
+{
+    min-width: 150px !important;
+    min-height: 150px !important;
+    border-radius: 100% !important;
+    position: relative;
+}
+
+.download_image > *
+{
+    padding: 30px 0 !important;
+}
+
+.upload_text
+{
+    font-size: 10px;
+}
+
+.preview
+{
+    top: 0;
+    left: 0; 
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 100% !important;
+}

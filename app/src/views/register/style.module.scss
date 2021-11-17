@@ -1,0 +1,21 @@
+@import '../../variables/Mixins.scss';
+$ptRegisterForm: 240px;
+$plRegisterForm: 80px;
+
+.wrapper
+{
+    display: flex;
+}
+
+.container
+{
+    width: 990px;
+    padding-top: $ptRegisterForm;
+    padding-left: $plRegisterForm;
+}
+
+.title
+{
+    @include titleText;
+}
+

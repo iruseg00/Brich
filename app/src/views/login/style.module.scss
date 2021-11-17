@@ -1,0 +1,37 @@
+@import '../../variables/Mixins.scss';
+$ptLoginForm: 240px;
+$plLoginForm: 80px;
+$colorTextToRegister: #8CA2D3;
+
+.container
+{
+    display: flex;
+}
+
+.container_right
+{
+    width: 990px;
+    height: 633px;
+    padding-top: $ptLoginForm;
+    padding-left: $plLoginForm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.title
+{
+    @include titleText;
+}
+
+.register
+{
+    color: $colorTextToRegister;
+    font-size: 24px;
+}
+
+.link
+{
+    @include blueTextWithUnderline;
+}
+

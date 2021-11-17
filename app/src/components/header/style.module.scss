@@ -1,0 +1,121 @@
+@import '../../variables/Mixins.scss';
+$bcSideBarStatic: #9ccc65;
+$baseColorBlue: #8ca2d3;
+
+.container {
+	display: flex;
+	margin: 0;
+	justify-content: space-between;
+	align-items: center;
+	height: 118px;
+	border-bottom: 2px solid rgb(170, 170, 170);
+}
+
+.links_container {
+	padding-top: 20px;
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	justify-content: space-around !important;
+}
+
+.flex_1 {
+	height: 150px;
+	padding-left: 35px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.left_items {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.bar_img_container {
+	cursor: pointer;
+	padding-left: 35px;
+	padding-right: 49px;
+}
+
+.barImg {
+	width: 49px;
+	height: 43px;
+}
+
+.container_to_PC {
+	padding-bottom: 20px;
+}
+
+.avatar_container {
+	padding-right: 34px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.userID {
+	@include blackStandartText;
+	margin-right: 15px;
+	color: $baseColorBlue;
+}
+
+.title {
+	@include titleText;
+	color: #529ac6;
+}
+
+.side_bar_item {
+	@include sideBarItemStatic;
+}
+
+.side_bar_item:hover {
+	@include blueTextWithUnderline;
+}
+
+.side_bar_item::before {
+	position: absolute;
+	left: -20px;
+	top: 12px;
+	display: block;
+	content: '';
+	background-color: $baseColorBlue;
+	height: 10px;
+	width: 10px;
+	border-radius: 100px;
+	opacity: 0;
+}
+
+.side_bar_item:hover::before {
+	opacity: 1;
+}
+
+.menu > div > div {
+	background-color: $bcSideBarStatic !important;
+}
+
+.menu > div > div > div > div {
+	padding: 0;
+}
+
+.exit_link {
+	padding-left: 35px;
+}
+
+.exit_link::before {
+	position: absolute;
+	left: 15px;
+	top: 12px;
+	display: block;
+	content: '';
+	background-color: $baseColorBlue;
+	height: 10px;
+	width: 10px;
+	border-radius: 100px;
+	opacity: 0;
+}
+
+.exit_link:hover::before {
+	opacity: 1;
+}

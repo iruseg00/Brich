@@ -1,0 +1,39 @@
+@font-face {
+	font-family: 'Montserrat';
+	src: url(./assets/fonts/Montserrat-SemiBold.ttf) format('truetype');
+	font-weight: 600;
+}
+@font-face {
+	font-family: 'Montserrat';
+	src: url(./assets/fonts/Montserrat-Black.ttf) format('truetype');
+	font-weight: 900;
+}
+
+@import '~antd/dist/antd.css';
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	overflow-x: hidden;
+	width: 100vw;
+	height: 100vh;
+	font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+		'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+	font-weight: 600;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+#root,
+#root > div {
+	width: 100%;
+	height: 100%;
+}

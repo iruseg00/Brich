@@ -1,0 +1,17 @@
+$bcSideBarStatic: #9CCC65; 
+$widthSideBarStatic: 350px;
+$ptSideBarStatic: 200px;
+
+.container
+{
+    width: 350px;
+    height: 100%;
+    background-color: $bcSideBarStatic;
+    padding-top: $ptSideBarStatic;
+}
+
+.pc
+{
+    width: 300px;
+    height: 565px;
+}

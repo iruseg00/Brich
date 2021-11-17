@@ -1,0 +1,54 @@
+$bcInputs: #F5F5F5;
+$radiusButtonLogin: 10px;
+$bcButtonLogin: #8CA2D3;
+$sizeTextButtonAndLabels: 24px;
+
+.form
+{
+    width: 620px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.wrapper_input
+{
+    width: 100% !important;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapper_input label::before
+{
+    content: '' !important;
+}
+
+.wrapper_input label
+{
+    width: 170px;
+    font-size: $sizeTextButtonAndLabels;
+    padding-top: 20px;
+}
+
+.wrapper_input input
+{
+    background-color: $bcInputs;
+}
+
+.input 
+{
+    width: 450px;
+    height: 55px;
+    background-color: $bcInputs;
+}
+
+.submit
+{
+    background-color: $bcButtonLogin;
+    border-radius: $radiusButtonLogin;
+    width: 172px;
+    height: 53px;
+    font-size: $sizeTextButtonAndLabels;
+    border: none;
+}

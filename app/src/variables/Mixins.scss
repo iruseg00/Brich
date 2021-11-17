@@ -1,0 +1,28 @@
+$baseColorBlue: #8ca2d3;
+
+@mixin titleText($color: $baseColorBlue, $fSize: 55px, $fWeight: 900) {
+	font-weight: $fWeight;
+	font-size: $fSize;
+	line-height: 140.62%;
+	color: $color;
+}
+
+@mixin blueTextWithUnderline {
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 140.62%;
+	color: $baseColorBlue;
+	text-decoration: underline;
+}
+
+@mixin sideBarItemStatic {
+	position: relative;
+	font-size: 24px;
+	color: white;
+	line-height: 140.62%;
+}
+
+@mixin blackStandartText {
+	font-size: 24px;
+	color: black;
+}

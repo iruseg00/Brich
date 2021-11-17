@@ -1,0 +1,22 @@
+@import '../../variables/Mixins.scss';
+
+.main {
+	width: 1400px;
+	margin: 0 auto;
+}
+
+.testingSystem {
+	margin: 50px 25px;
+	@include titleText;
+	text-align: left;
+}
+
+.container {
+	width: 100%;
+}
+
+.spin {
+	width: 100%;
+	margin-top: 30%;
+	text-align: center;
+}

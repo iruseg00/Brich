@@ -1,0 +1,26 @@
+@import './../../variables/Mixins.scss';
+
+.container_to_steps {
+	padding-top: 80px;
+	width: 1200px;
+	height: 80%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.container_to_steps > div > div > div > div > div::after {
+	background-color: black !important;
+}
+
+.container_to_TestSetup {
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.steps_conent_my {
+	height: 100%;
+}

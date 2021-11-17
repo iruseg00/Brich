@@ -1,0 +1,33 @@
+@import '../../variables//Mixins.scss';
+
+.container {
+	width: 30%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-top: 40px;
+	margin-left: 0px;
+}
+
+.imageContainer {
+	margin-right: 40px;
+}
+
+.image {
+	width: 142px;
+	height: 124px;
+}
+
+.titles {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.title {
+	@include titleText;
+}
+
+.subTitle {
+	font-size: 16px;
+}

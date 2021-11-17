@@ -1,0 +1,21 @@
+.containerToResults {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-gap: 40px;
+	width: 1400px;
+	margin: 0 auto;
+	justify-items: center;
+	margin-top: 22px;
+	padding-bottom: 22px;
+}
+
+.container {
+	width: 1400px;
+	margin: 0 auto;
+}
+
+.spin {
+	width: 100%;
+	margin-top: 30%;
+	text-align: center;
+}
