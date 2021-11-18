@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
 import Register from './views/register/Register';
 import Login from './views/login/Login';
-import MainTests from './views/dashboard/Dashboard';
+// import MainTests from './views/dashboard/Dashboard';
 import PageWrapper from './containers/pageWrapper/PageWrapper';
 import { whoAmI } from './redux/actions/users';
 import Page_404 from './views/page_404/Page_404';
@@ -36,12 +36,12 @@ const App = () => {
 					<PageWrapper {...props} title='Регистрация' component={Register} notAuth />
 				)}
 			/>
-			<Route
+			{/* <Route
 				path='/dashboard'
 				render={(props) => (
 					<PageWrapper {...props} title='Тесты' component={MainTests} Auth />
 				)}
-			/>
+			/> */}
 			<Route path='*' exact component={Page_404} />
 		</Switch>
 	);
