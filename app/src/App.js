@@ -22,12 +22,12 @@ const App = () => {
 		<Switch>
 			{/* <Route
 				exact
-				path='/'
+				path='/'-
 				render={() => (
 					<Redirect from='/' to={{ pathname: '/dashboard', state: location.state }} />
 				)}
 			/> */}
-			<Route path='/' component={BrichProfile} />
+
 			<Route
 				path='/login'
 				render={(props) => <PageWrapper {...props} title='Вход' component={Login} notAuth />}
@@ -38,6 +38,7 @@ const App = () => {
 					<PageWrapper {...props} title='Регистрация' component={Register} notAuth />
 				)}
 			/>
+			<Route path='/' component={BrichProfile} />
 			{/* <Route
 				path='/dashboard'
 				render={(props) => (
