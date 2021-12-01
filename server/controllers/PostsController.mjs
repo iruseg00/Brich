@@ -26,10 +26,7 @@ router.post("/create", async (req, res) => {
 router.post("/download", async (req, res) => {
   try {
     const data = await PostService.getAll(req.user.id);
-    const blob = new Blob([JSON.stringify(data)], {
-      type: "application/json",
-    });
-    res.status(200).json(blob);
+    res.status(200).json(data);
     await PostService.deleteAll(req.user.id);
   } catch (error) {
     res.status(500).send(error);
@@ -39,7 +36,8 @@ router.post("/download", async (req, res) => {
 router.post("/upload", async (req, res) => {
   try {
     const data = await PostService.upload(req.params.id);
-    res.status(200).json(data);
+    console.log("upload data:", data);
+    res.status(200);
   } catch (error) {
     res.status(500).send(error);
   }

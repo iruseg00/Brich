@@ -18,3 +18,12 @@ sequelize
   .catch((err) => {
     console.error("Unable to connect to the database:", err);
   });
+
+import { Blob } from "node:buffer";
+
+const data = ["s"];
+const blob = new Blob([JSON.stringify(data)], {
+  type: "application/json",
+});
+console.log("--------------------------------------");
+console.log(blob);
