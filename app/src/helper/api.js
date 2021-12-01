@@ -4,8 +4,8 @@ import AuthService from '../services/AuthService';
 const api = async (url, method = 'GET', data) => {
 	var time = parseInt(new Date().getTime() / 1000);
 	if (
-		time + 100 > localStorage.getItem('expires_in') &&
-		localStorage.getItem('expires_in')
+		time + 100 > localStorage.getItem('expires_in') ||
+		!localStorage.getItem('expires_in')
 	) {
 		await AuthService.refresh(localStorage.getItem('refreshToken'))
 			.then((resp) => {

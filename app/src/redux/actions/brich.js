@@ -4,11 +4,13 @@ import {
 	FAILED_REQUEST,
 	ABOUT_REQUEST,
 	GET_POSTS,
+	DOWNLOAD_JSON,
 } from '../actionsTypes/brich';
 import {
 	getInfoAboutMe,
 	sendPost as serviceSendPost,
 	getAllPosts as getAllPostsService,
+	downloadJSON as downloadJSON_service,
 } from '../../services/brich';
 import { message } from 'antd';
 
@@ -43,6 +45,19 @@ export const getAllPosts = () => {
 			dispatch({ type: REQUEST });
 			const posts = await getAllPostsService();
 			dispatch({ type: GET_POSTS, payload: posts });
+			message.success('Успешно!');
+		} catch {
+			message.error('Ошибка');
+		}
+	};
+};
+
+export const downloadJSON = () => {
+	return async (dispatch) => {
+		try {
+			dispatch({ type: REQUEST });
+			const file = await downloadJSON_service();
+			dispatch({ type: DOWNLOAD_JSON, payload: file });
 			message.success('Успешно!');
 		} catch {
 			message.error('Ошибка');

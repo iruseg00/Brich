@@ -1,3 +1,4 @@
+import FileSaver, { saveAs } from 'file-saver';
 import { Button, Form, Input, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { useEffect } from 'react';
@@ -6,6 +7,7 @@ import {
 	getProfileInfo,
 	sendPost as sendPostAction,
 	getAllPosts,
+	downloadJSON,
 } from '../../redux/actions/brich';
 import style from './style.module.scss';
 import FormItem from 'antd/lib/form/FormItem';
@@ -18,6 +20,7 @@ const BrichProfile = () => {
 	const state = useSelector((store) => store.brich.about);
 	const posts = useSelector((store) => store.brich.posts);
 	const loading = useSelector((store) => store.brich.loading);
+	const file = useSelector((store) => store.brich.file);
 	const antIcon = <LoadingOutlined style={{ fontSize: 64 }} spin />;
 
 	const sendPost = (sendData) => {
@@ -37,6 +40,13 @@ const BrichProfile = () => {
 				</div>
 			);
 		});
+	};
+
+	const downloadPosts = () => {
+		dispatch(downloadJSON());
+		console.log(file);
+		const blob = new Blob([JSON.stringify(file.data)], { type: 'application/json' });
+		FileSaver.saveAs(blob, 'posts.json');
 	};
 
 	return loading ? (
@@ -62,6 +72,9 @@ const BrichProfile = () => {
 				</Button>
 				<Button onClick={() => dispatch(getAllPosts())} type='default'>
 					Получить посты
+				</Button>
+				<Button onClick={() => downloadPosts()} type='default'>
+					Скачать посты (JSON)
 				</Button>
 			</Form>
 			{console.log(posts)}

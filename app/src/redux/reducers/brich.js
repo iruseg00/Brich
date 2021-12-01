@@ -5,6 +5,7 @@ import {
 	FAILED_REQUEST,
 	ABOUT_REQUEST,
 	GET_POSTS,
+	DOWNLOAD_JSON,
 } from '../actionsTypes/brich';
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
 	loading: false,
 	info: null,
 	posts: {},
+	file: {},
 };
 
 const brichReducer = (state = initialState, action) => {
@@ -34,6 +36,10 @@ const brichReducer = (state = initialState, action) => {
 		case GET_POSTS:
 			newState.posts = action.payload;
 			newState.loading = false;
+			return newState;
+		case DOWNLOAD_JSON:
+			newState.loading = false;
+			newState.file = action.payload;
 			return newState;
 		default:
 			newState.loading = false;

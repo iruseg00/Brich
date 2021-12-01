@@ -11,3 +11,7 @@ export const sendPost = (data) => {
 export const getAllPosts = () => {
 	return api('posts/all');
 };
+
+export const downloadJSON = () => {
+	return api('posts/download', 'POST');
+};
