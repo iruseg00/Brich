@@ -1,5 +1,5 @@
 import express from "express";
-import { Blob } from "node:buffer";
+import fs from "fs";
 
 import PostService from "../services/PostService.mjs";
 const router = express.Router();
@@ -35,8 +35,9 @@ router.post("/download", async (req, res) => {
 
 router.post("/upload", async (req, res) => {
   try {
-    const data = await PostService.upload(req.params.id);
-    console.log("upload data:", data);
+    const posts = JSON.parse(fs.readFileSync(req.body, "utf8"));
+    console.log("upload data:", posts);
+    posts.forEach(async (post) => await PostService.create(req.user.id, post));
     res.status(200);
   } catch (error) {
     res.status(500).send(error);
