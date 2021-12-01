@@ -42,12 +42,11 @@ const BrichProfile = () => {
 		});
 	};
 
-	const downloadPosts = () => {
-		dispatch(downloadJSON());
+	if (file.data) {
 		console.log(file);
 		const blob = new Blob([JSON.stringify(file.data)], { type: 'application/json' });
 		FileSaver.saveAs(blob, 'posts.json');
-	};
+	}
 
 	return loading ? (
 		<div className={style.spinContainer}>
@@ -73,7 +72,7 @@ const BrichProfile = () => {
 				<Button onClick={() => dispatch(getAllPosts())} type='default'>
 					Получить посты
 				</Button>
-				<Button onClick={() => downloadPosts()} type='default'>
+				<Button onClick={() => dispatch(downloadJSON())} type='default'>
 					Скачать посты (JSON)
 				</Button>
 			</Form>
