@@ -1,4 +1,3 @@
-import { message } from 'antd';
 import {
 	REQUEST,
 	SUCCESS_REQUEST,
@@ -6,6 +5,7 @@ import {
 	ABOUT_REQUEST,
 	GET_POSTS,
 	DOWNLOAD_JSON,
+	UPLOAD_JSON,
 } from '../actionsTypes/brich';
 
 const initialState = {
@@ -40,6 +40,10 @@ const brichReducer = (state = initialState, action) => {
 		case DOWNLOAD_JSON:
 			newState.loading = false;
 			newState.file = action.payload;
+			return newState;
+		case UPLOAD_JSON:
+			newState.posts = action.payload;
+			newState.loading = false;
 			return newState;
 		default:
 			newState.loading = false;

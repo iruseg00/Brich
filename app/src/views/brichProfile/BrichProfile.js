@@ -1,5 +1,6 @@
-import FileSaver, { saveAs } from 'file-saver';
-import { Button, Form, Input, Spin } from 'antd';
+import FileSaver from 'file-saver';
+import { Button, Form, Input, Spin, Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 import { LoadingOutlined } from '@ant-design/icons';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +9,7 @@ import {
 	sendPost as sendPostAction,
 	getAllPosts,
 	downloadJSON,
+	uploadJSON,
 } from '../../redux/actions/brich';
 import style from './style.module.scss';
 import FormItem from 'antd/lib/form/FormItem';
@@ -42,6 +44,11 @@ const BrichProfile = () => {
 		});
 	};
 
+	async function getData(dataa) {
+		console.log(dataa);
+		dispatch(uploadJSON(dataa));
+	}
+
 	if (file.data) {
 		console.log(file);
 		const blob = new Blob([JSON.stringify(file.data)], { type: 'application/json' });
@@ -54,7 +61,6 @@ const BrichProfile = () => {
 		</div>
 	) : (
 		<div>
-			<div>Name: {state?.data?.name}</div>
 			<div>Surname: {state?.data?.surname}</div>
 			<div>Middlename: {state?.data?.middleName}</div>
 			<div>Email: {state?.data?.email}</div>
@@ -76,6 +82,9 @@ const BrichProfile = () => {
 					Скачать посты (JSON)
 				</Button>
 			</Form>
+			<Upload showUploadList={false} onChange={getData}>
+				<Button icon={<UploadOutlined />}>Click to Upload</Button>
+			</Upload>
 			{console.log(posts)}
 			{posts.data ? renderPosts(posts.data) : null}
 		</div>

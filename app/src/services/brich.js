@@ -15,3 +15,7 @@ export const getAllPosts = () => {
 export const downloadJSON = () => {
 	return api('posts/download', 'POST');
 };
+
+export const uploadJSON = (file) => {
+	return api('posts/upload', 'POST', file);
+};

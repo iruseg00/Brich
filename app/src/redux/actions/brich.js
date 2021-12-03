@@ -5,12 +5,14 @@ import {
 	ABOUT_REQUEST,
 	GET_POSTS,
 	DOWNLOAD_JSON,
+	UPLOAD_JSON,
 } from '../actionsTypes/brich';
 import {
 	getInfoAboutMe,
 	sendPost as serviceSendPost,
 	getAllPosts as getAllPostsService,
 	downloadJSON as downloadJSON_service,
+	uploadJSON as uploadJSONService,
 } from '../../services/brich';
 import { message } from 'antd';
 
@@ -58,6 +60,19 @@ export const downloadJSON = () => {
 			dispatch({ type: REQUEST });
 			const file = await downloadJSON_service();
 			dispatch({ type: DOWNLOAD_JSON, payload: file });
+			message.success('Успешно!');
+		} catch {
+			message.error('Ошибка');
+		}
+	};
+};
+
+export const uploadJSON = (file) => {
+	return async (dispatch) => {
+		try {
+			dispatch({ type: REQUEST });
+			const data = await uploadJSONService(file);
+			dispatch({ type: UPLOAD_JSON, payload: data });
 			message.success('Успешно!');
 		} catch {
 			message.error('Ошибка');

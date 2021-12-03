@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Register from './views/register/Register';
 import Login from './views/login/Login';
 // import MainTests from './views/dashboard/Dashboard';
@@ -13,10 +13,9 @@ const App = () => {
 	const auth = useSelector((state) => state.auth);
 	const user = useSelector((state) => state.users.profile);
 	const dispatch = useDispatch();
-	const location = useLocation();
 	useEffect(() => {
 		if (auth.accessToken && !user.name) dispatch(whoAmI());
-	}, []);
+	}, [dispatch, auth, user]);
 
 	return (
 		<Switch>
