@@ -46,7 +46,7 @@ const BrichProfile = () => {
 
 	async function getData(dataa) {
 		console.log(dataa);
-		dispatch(uploadJSON(dataa));
+		dispatch(uploadJSON(dataa.file));
 	}
 
 	if (file.data) {
