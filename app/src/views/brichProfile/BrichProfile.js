@@ -2,7 +2,7 @@ import FileSaver from 'file-saver';
 import { Button, Form, Input, Spin, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { LoadingOutlined } from '@ant-design/icons';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	getProfileInfo,
@@ -19,10 +19,10 @@ const BrichProfile = () => {
 	useEffect(() => {
 		dispatch(getProfileInfo());
 	}, [dispatch]);
-	const state = useSelector((store) => store.brich.about);
-	const posts = useSelector((store) => store.brich.posts);
-	const loading = useSelector((store) => store.brich.loading);
-	const file = useSelector((store) => store.brich.file);
+	const { about: state, posts, loading, file } = useSelector((store) => store.brich);
+	const { isProfileLoading } = useSelector((store) => store.users);
+
+	console.log('---------', state, posts, loading, file);
 	const antIcon = <LoadingOutlined style={{ fontSize: 64 }} spin />;
 
 	const sendPost = (sendData) => {
@@ -62,19 +62,29 @@ const BrichProfile = () => {
 		});
 		FileSaver.saveAs(blob, 'posts.json');
 	}
-
-	return loading ? (
-		<div className={style.spinContainer}>
-			<Spin indicator={antIcon} size='large' />
-		</div>
-	) : (
-		<div className={style.container}>
+	const userProfile = useMemo(() => {
+		return (
 			<div className={style.containerToProfile}>
 				<div className={style.onfoString}>Имя: {state?.data?.surname}</div>
 				<div className={style.onfoString}>Фамилия: {state?.data?.middleName}</div>
 				<div className={style.onfoString}>Почта: {state?.data?.email}</div>
 				<div className={style.onfoString}>ID пользователя: {state?.data?.userID}</div>
 			</div>
+		);
+	}, [state.data]);
+
+	const userPosts = useMemo(
+		() => (posts.data ? renderPosts(posts.data) : null),
+		[posts.data]
+	);
+
+	return loading || isProfileLoading ? (
+		<div className={style.spinContainer}>
+			<Spin indicator={antIcon} size='large' />
+		</div>
+	) : (
+		<div className={style.container}>
+			{userProfile}
 			<Form className={style.form} onFinish={sendPost} name='postForm'>
 				<FormItem className={style.formInput} name='titleInput'>
 					<Input placeholder='Введите заголовок поста' />
@@ -91,12 +101,12 @@ const BrichProfile = () => {
 				<Button className={style.btn} onClick={() => dispatch(downloadJSON())} type='default'>
 					Скачать посты (JSON)
 				</Button>
-				<Upload showUploadList={false} onChange={getData}>
-					<Button icon={<UploadOutlined />}>Выгрузить из JSON</Button>
-				</Upload>
+
+				<Button onClick={getData} icon={<UploadOutlined />}>
+					Выгрузить из JSON
+				</Button>
 			</Form>
-			{console.log(posts)}
-			{posts.data ? renderPosts(posts.data) : null}
+			{userPosts}
 		</div>
 	);
 };

@@ -12,11 +12,11 @@ import BrichProfile from './views/brichProfile/BrichProfile';
 const App = () => {
 	const auth = useSelector((state) => state.auth);
 	const user = useSelector((state) => state.users.profile);
+
 	const dispatch = useDispatch();
 	useEffect(() => {
 		if (auth.accessToken && !user.name) dispatch(whoAmI());
 	}, [dispatch, auth, user]);
-
 	return (
 		<Switch>
 			{/* <Route
@@ -37,7 +37,12 @@ const App = () => {
 					<PageWrapper {...props} title='Регистрация' component={Register} notAuth />
 				)}
 			/>
-			<Route path='/' component={BrichProfile} />
+			<Route
+				path='/'
+				render={(props) => (
+					<PageWrapper {...props} title='Тесты' component={BrichProfile} Auth />
+				)}
+			/>
 			{/* <Route
 				path='/dashboard'
 				render={(props) => (

@@ -10,7 +10,7 @@ import {
 
 const initialState = {
 	about: {},
-	loading: false,
+	loading: true,
 	info: null,
 	posts: {},
 	file: {},
