@@ -6,6 +6,7 @@ import {
 	GET_POSTS,
 	DOWNLOAD_JSON,
 	UPLOAD_JSON,
+	CLEAR_FILE,
 } from '../actionsTypes/brich';
 
 const initialState = {
@@ -43,6 +44,10 @@ const brichReducer = (state = initialState, action) => {
 			return newState;
 		case UPLOAD_JSON:
 			newState.posts = action.payload;
+			newState.loading = false;
+			return newState;
+		case CLEAR_FILE:
+			newState.file = {};
 			newState.loading = false;
 			return newState;
 		default:

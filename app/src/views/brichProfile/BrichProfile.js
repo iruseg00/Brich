@@ -10,6 +10,7 @@ import {
 	getAllPosts,
 	downloadJSON,
 	uploadJSON,
+	clearFileData,
 } from '../../redux/actions/brich';
 import style from './style.module.scss';
 import FormItem from 'antd/lib/form/FormItem';
@@ -19,9 +20,8 @@ const BrichProfile = () => {
 	useEffect(() => {
 		dispatch(getProfileInfo());
 	}, [dispatch]);
-	const { about: state, posts, loading, file } = useSelector((store) => store.brich);
+	let { about: state, posts, loading, file } = useSelector((store) => store.brich);
 	const { isProfileLoading } = useSelector((store) => store.users);
-
 	console.log('---------', state, posts, loading, file);
 	const antIcon = <LoadingOutlined style={{ fontSize: 64 }} spin />;
 
@@ -61,6 +61,7 @@ const BrichProfile = () => {
 			type: 'application/json',
 		});
 		FileSaver.saveAs(blob, 'posts.json');
+		dispatch(clearFileData());
 	}
 	const userProfile = useMemo(() => {
 		return (
