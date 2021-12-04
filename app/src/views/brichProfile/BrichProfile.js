@@ -36,24 +36,30 @@ const BrichProfile = () => {
 	const renderPosts = (arr) => {
 		return arr.map((el) => {
 			return (
-				<div key={el.postId}>
-					<div>Заголовок: {el.title}</div>
-					<div>Текст: {el.text}</div>
+				<div className={style.post} key={el.postId}>
+					<div className={style.titleOfPost}>{el.title}</div>
+					<div>{el.text}</div>
 				</div>
 			);
 		});
 	};
 
-	async function getData(dataa) {
-		console.log(dataa);
-		let obj = await fetch(dataa);
-		console.log(obj);
-		dispatch(uploadJSON(obj));
+	async function getData() {
+		const input = document.createElement('input');
+		input.type = 'file';
+		input.addEventListener('change', function (event) {
+			const File = event.target.files[0];
+			console.log(File);
+			File && dispatch(uploadJSON(File));
+		});
+		input.click();
 	}
 
 	if (file.data) {
 		console.log(file);
-		const blob = new Blob([JSON.stringify(file.data)], { type: 'application/json' });
+		const blob = new Blob([JSON.stringify(file.data)], {
+			type: 'application/json',
+		});
 		FileSaver.saveAs(blob, 'posts.json');
 	}
 
@@ -63,10 +69,12 @@ const BrichProfile = () => {
 		</div>
 	) : (
 		<div className={style.container}>
-			<div className={style.onfoString}>Имя: {state?.data?.surname}</div>
-			<div className={style.onfoString}>Фамилия: {state?.data?.middleName}</div>
-			<div className={style.onfoString}>Почта: {state?.data?.email}</div>
-			<div className={style.onfoString}>ID пользователя: {state?.data?.userID}</div>
+			<div className={style.containerToProfile}>
+				<div className={style.onfoString}>Имя: {state?.data?.surname}</div>
+				<div className={style.onfoString}>Фамилия: {state?.data?.middleName}</div>
+				<div className={style.onfoString}>Почта: {state?.data?.email}</div>
+				<div className={style.onfoString}>ID пользователя: {state?.data?.userID}</div>
+			</div>
 			<Form className={style.form} onFinish={sendPost} name='postForm'>
 				<FormItem className={style.formInput} name='titleInput'>
 					<Input placeholder='Введите заголовок поста' />
