@@ -62,31 +62,31 @@ const BrichProfile = () => {
 			<Spin indicator={antIcon} size='large' />
 		</div>
 	) : (
-		<div>
-			<div>Surname: {state?.data?.surname}</div>
-			<div>Middlename: {state?.data?.middleName}</div>
-			<div>Email: {state?.data?.email}</div>
-			<div>USERID: {state?.data?.userID}</div>
-			<Form onFinish={sendPost} name='postForm'>
-				<FormItem name='titleInput'>
+		<div className={style.container}>
+			<div className={style.onfoString}>Имя: {state?.data?.surname}</div>
+			<div className={style.onfoString}>Фамилия: {state?.data?.middleName}</div>
+			<div className={style.onfoString}>Почта: {state?.data?.email}</div>
+			<div className={style.onfoString}>ID пользователя: {state?.data?.userID}</div>
+			<Form className={style.form} onFinish={sendPost} name='postForm'>
+				<FormItem className={style.formInput} name='titleInput'>
 					<Input placeholder='Введите заголовок поста' />
 				</FormItem>
-				<FormItem name='descriptionInput'>
+				<FormItem className={style.formInput} name='descriptionInput'>
 					<Input placeholder='Введите текст поста' />
 				</FormItem>
-				<Button htmlType='submit' type='primary'>
+				<Button className={style.btn} htmlType='submit' type='primary'>
 					Отправить
 				</Button>
-				<Button onClick={() => dispatch(getAllPosts())} type='default'>
+				<Button className={style.btn} onClick={() => dispatch(getAllPosts())} type='default'>
 					Получить посты
 				</Button>
-				<Button onClick={() => dispatch(downloadJSON())} type='default'>
+				<Button className={style.btn} onClick={() => dispatch(downloadJSON())} type='default'>
 					Скачать посты (JSON)
 				</Button>
+				<Upload showUploadList={false} onChange={getData}>
+					<Button icon={<UploadOutlined />}>Выгрузить из JSON</Button>
+				</Upload>
 			</Form>
-			<Upload showUploadList={false} onChange={getData}>
-				<Button icon={<UploadOutlined />}>Click to Upload</Button>
-			</Upload>
 			{console.log(posts)}
 			{posts.data ? renderPosts(posts.data) : null}
 		</div>
