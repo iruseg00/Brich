@@ -10,6 +10,12 @@ class PostService {
     });
   }
 
+  getAllPosts() {
+    return Posts.findAll({
+      attributes: ["postId", "title", "text", "userId"],
+    });
+  }
+
   create(userId, body) {
     return Posts.findOrCreate({
       where: {
@@ -27,6 +33,10 @@ class PostService {
     return Posts.destroy({
       where: { userId },
     });
+  }
+
+  deleteAllPosts() {
+    return Posts.destroy();
   }
 
   getMe(id) {

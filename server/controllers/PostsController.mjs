@@ -1,5 +1,6 @@
 import express from "express";
 import PostService from "../services/PostService.mjs";
+import UserService from "../services/UserService.mjs";
 import fs from "fs";
 
 const router = express.Router();
@@ -11,6 +12,19 @@ router.get("/all", async (req, res) => {
   try {
     const data = await PostService.getAll(req.user.id);
     res.status(200).json(data);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+router.get("/get_all", async (req, res) => {
+  try {
+    const data = await PostService.getAllPosts();
+    const posts = data.map(async (item) => {
+      const user = await UserService.getMe(item.userId);
+      return { ...item, user };
+    });
+    res.status(200).json(posts);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -36,7 +50,41 @@ router.post("/download", async (req, res) => {
   }
 });
 
+router.post("/download_all", async (req, res) => {
+  try {
+    const data = await PostService.getAllPosts();
+    res.status(200).json(data);
+    await PostService.deleteAllPosts();
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 router.post("/upload", async (req, res) => {
+  try {
+    form.parse(req, (err, fields, files) => {
+      if (err) {
+        throw new Error(err);
+      }
+
+      fs.readFile(files.file.filepath, async (err, data) => {
+        let buff = new Buffer.from(data, "base64");
+        let posts = buff.toString("ascii");
+        posts = JSON.parse(posts);
+        posts.forEach(
+          async (post) => await PostService.create(req.user.id, post)
+        );
+
+        const Posts = await PostService.getAll(req.user.id);
+        res.status(200).json(Posts);
+      });
+    });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+router.post("/upload_all", async (req, res) => {
   try {
     form.parse(req, (err, fields, files) => {
       if (err) {
