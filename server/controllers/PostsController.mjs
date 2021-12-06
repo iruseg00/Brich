@@ -19,12 +19,14 @@ router.get("/all", async (req, res) => {
 
 router.get("/get_all", async (req, res) => {
   try {
-    const data = await PostService.getAllPosts();
-    const posts = data.map(async (item) => {
-      const user = await UserService.getMe(item.userId);
-      return { ...item, user };
+    const Users = await UserService.getAll();
+    const UsersAndPosts = [];
+
+    Users.forEach(async (user, i) => {
+      const posts = await PostService.getAll(user.id);
+      UsersAndPosts.push({ user, posts });
+      if (i + 1 == Users.length) res.status(200).json(UsersAndPosts);
     });
-    res.status(200).json(posts);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -50,7 +52,7 @@ router.post("/download", async (req, res) => {
   }
 });
 
-router.post("/download_all", async (req, res) => {
+router.post("/loadingAll", async (req, res) => {
   try {
     const data = await PostService.getAllPosts();
     res.status(200).json(data);

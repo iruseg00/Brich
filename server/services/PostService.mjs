@@ -3,7 +3,7 @@ import Posts from "../db/models/Posts.mjs";
 const Op = Sequelize.Op;
 
 class PostService {
-  getAll(id) {
+  async getAll(id) {
     return Posts.findAll({
       where: { userId: { [Op.eq]: id } },
       attributes: ["postId", "title", "text"],
@@ -36,7 +36,10 @@ class PostService {
   }
 
   deleteAllPosts() {
-    return Posts.destroy();
+    return Posts.destroy({
+      where: {},
+      truncate: true,
+    });
   }
 
   getMe(id) {

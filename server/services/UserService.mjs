@@ -1,87 +1,102 @@
-import Sequelize from 'sequelize';
-import Users from '../db/models/Users.mjs';
+import Sequelize from "sequelize";
+import Users from "../db/models/Users.mjs";
 const Op = Sequelize.Op;
 
 class UserService {
-	get(id) {
-		return Users.findOne({
-			attributes: [
-				'id',
-				'userID',
-				'surname',
-				'name',
-				'middleName',
-				'role',
-				'sex',
-				'email',
-				'photo',
-				'tokens',
-			],
-			where: { id },
-		});
-	}
+  get(id) {
+    return Users.findOne({
+      attributes: [
+        "id",
+        "userID",
+        "surname",
+        "name",
+        "middleName",
+        "role",
+        "sex",
+        "email",
+        "photo",
+        "tokens",
+      ],
+      where: { id },
+    });
+  }
 
-	getMe(id) {
-		return Users.findOne({
-			attributes: [
-				'userID',
-				'surname',
-				'name',
-				'middleName',
-				'role',
-				'sex',
-				'email',
-				'photo',
-			],
-			where: { id },
-		});
-	}
+  async getAll() {
+    return await Users.findAll({
+      attributes: [
+        "id",
+        "userID",
+        "surname",
+        "name",
+        "middleName",
+        "sex",
+        "email",
+        "photo",
+      ],
+    });
+  }
 
-	find(user) {
-		return Users.findOne({
-			where: {
-				[Op.or]: [{ email: user }],
-			},
-		});
-	}
+  getMe(id) {
+    return Users.findOne({
+      attributes: [
+        "userID",
+        "surname",
+        "name",
+        "middleName",
+        "role",
+        "sex",
+        "email",
+        "photo",
+      ],
+      where: { id },
+    });
+  }
 
-	create(body) {
-		return Users.findOrCreate({
-			where: {
-				email: body.email,
-			},
-			defaults: {
-				surname: body.surname,
-				name: body.name,
-				middleName: body.middleName,
-				sex: body.sex,
-				email: body.email,
-				password: body.password,
-				photo: body.photo,
-			},
-		});
-	}
+  find(user) {
+    return Users.findOne({
+      where: {
+        [Op.or]: [{ email: user }],
+      },
+    });
+  }
 
-	update(body, id) {
-		return Users.update(body, {
-			where: { id },
-		});
-	}
+  create(body) {
+    return Users.findOrCreate({
+      where: {
+        email: body.email,
+      },
+      defaults: {
+        surname: body.surname,
+        name: body.name,
+        middleName: body.middleName,
+        sex: body.sex,
+        email: body.email,
+        password: body.password,
+        photo: body.photo,
+      },
+    });
+  }
 
-	setImageBase64(body, id) {
-		return Users.update(
-			{ photo: body.photo },
-			{
-				where: { id },
-			}
-		);
-	}
+  update(body, id) {
+    return Users.update(body, {
+      where: { id },
+    });
+  }
 
-	delete(id) {
-		return Users.destroy({
-			where: { id },
-		});
-	}
+  setImageBase64(body, id) {
+    return Users.update(
+      { photo: body.photo },
+      {
+        where: { id },
+      }
+    );
+  }
+
+  delete(id) {
+    return Users.destroy({
+      where: { id },
+    });
+  }
 }
 
 export default new UserService();
