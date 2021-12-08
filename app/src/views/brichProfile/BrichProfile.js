@@ -1,5 +1,5 @@
 import FileSaver from 'file-saver';
-import { Button, Form, Input, Spin, Upload } from 'antd';
+import { Button, Form, Input, Spin } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { LoadingOutlined } from '@ant-design/icons';
 import { useEffect, useMemo } from 'react';
@@ -11,17 +11,20 @@ import {
 	downloadJSON,
 	uploadJSON,
 	clearFileData,
+	adminGetPosts,
 } from '../../redux/actions/brich';
 import style from './style.module.scss';
 import FormItem from 'antd/lib/form/FormItem';
 
 const BrichProfile = () => {
 	const dispatch = useDispatch();
+	let { about: state, posts, loading, file } = useSelector((store) => store.brich);
+	let userID = useSelector((store) => store.users.profile.userID);
+	let isProfileLoading = useSelector((store) => store.users.isProfileLoading);
 	useEffect(() => {
 		dispatch(getProfileInfo());
-	}, [dispatch]);
-	let { about: state, posts, loading, file } = useSelector((store) => store.brich);
-	const { isProfileLoading } = useSelector((store) => store.users);
+	}, [dispatch, userID]);
+
 	console.log('---------', state, posts, loading, file);
 	const antIcon = <LoadingOutlined style={{ fontSize: 64 }} spin />;
 
@@ -56,7 +59,6 @@ const BrichProfile = () => {
 	}
 
 	if (file.data) {
-		console.log(file);
 		const blob = new Blob([JSON.stringify(file.data)], {
 			type: 'application/json',
 		});
@@ -96,7 +98,13 @@ const BrichProfile = () => {
 				<Button className={style.btn} htmlType='submit' type='primary'>
 					Отправить
 				</Button>
-				<Button className={style.btn} onClick={() => dispatch(getAllPosts())} type='default'>
+				<Button
+					className={style.btn}
+					onClick={() => {
+						userID !== 1 ? dispatch(getAllPosts()) : dispatch(adminGetPosts());
+					}}
+					type='default'
+				>
 					Получить посты
 				</Button>
 				<Button className={style.btn} onClick={() => dispatch(downloadJSON())} type='default'>

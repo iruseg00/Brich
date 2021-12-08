@@ -14,6 +14,7 @@ import {
 	getAllPosts as getAllPostsService,
 	downloadJSON as downloadJSON_service,
 	uploadJSON as uploadJSONService,
+	adminGetPosts as adminGetPostsService,
 } from '../../services/brich';
 import { message } from 'antd';
 
@@ -91,6 +92,18 @@ export const clearFileData = () => {
 		try {
 			dispatch({ type: REQUEST });
 			dispatch({ type: CLEAR_FILE });
+		} catch {
+			message.error('Ошибка');
+		}
+	};
+};
+
+export const adminGetPosts = () => {
+	return async (dispatch) => {
+		try {
+			dispatch({ type: REQUEST });
+			let posts = await adminGetPostsService();
+			dispatch({ type: GET_POSTS, payload: posts });
 		} catch {
 			message.error('Ошибка');
 		}
