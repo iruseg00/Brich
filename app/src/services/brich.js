@@ -21,5 +21,5 @@ export const uploadJSON = (file, headers = {}) => {
 };
 
 export const adminGetPosts = () => {
-	return api('users/get_all');
+	return api('posts/get_all');
 };

@@ -38,7 +38,21 @@ const BrichProfile = () => {
 
 	const renderPosts = (arr) => {
 		return arr.map((el) => {
-			return (
+			return userID == 1 ? (
+				<div className={style.postAdmin} key={el.postId}>
+					<div className={style.userName}>
+						{el.user.name} {el.user.surname}
+					</div>
+					{el.posts.map((el, index) => {
+						return (
+							<div className={style.post}>
+								<div className={style.titleOfPost}>{el.title}</div>
+								<div>{el.text}</div>
+							</div>
+						);
+					})}
+				</div>
+			) : (
 				<div className={style.post} key={el.postId}>
 					<div className={style.titleOfPost}>{el.title}</div>
 					<div>{el.text}</div>
@@ -116,6 +130,7 @@ const BrichProfile = () => {
 				</Button>
 			</Form>
 			{userPosts}
+			{console.log(posts.data)}
 		</div>
 	);
 };
